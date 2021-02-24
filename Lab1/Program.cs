@@ -43,6 +43,7 @@ namespace Lab1
           field[i, j] = ch;
         }
       }
+      fin.Close();
     }
 
     public static void printField()
@@ -99,6 +100,7 @@ namespace Lab1
   {
     static void Main(string[] args)
     {
+      Console.CursorVisible = false;
 
       while (!Game.isWin())
       {
@@ -134,7 +136,7 @@ namespace Lab1
       {
         Console.WriteLine();
       }
-
+      
     }
   }
 }
