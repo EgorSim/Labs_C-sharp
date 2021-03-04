@@ -1,0 +1,436 @@
+[1mdiff --git a/Lab1/.vs/Lab1/v16/.suo b/Lab1/.vs/Lab1/v16/.suo[m
+[1mindex be72da9..426d9a9 100644[m
+Binary files a/Lab1/.vs/Lab1/v16/.suo and b/Lab1/.vs/Lab1/v16/.suo differ
+[1mdiff --git a/Lab1/Program.cs b/Lab1/Program.cs[m
+[1mindex b202d7e..8cd3ede 100644[m
+[1m--- a/Lab1/Program.cs[m
+[1m+++ b/Lab1/Program.cs[m
+[36m@@ -1,96 +1,185 @@[m
+ ﻿using System;[m
+[31m-using System.IO;[m
+[32m+[m[32musing System.Collections.Generic;[m
+ [m
+ [m
+ namespace Lab1[m
+ {[m
+   static class Game[m
+   {[m
+[31m-    static Game()[m
+[32m+[m[32m    public static bool IsWin()[m
+     {[m
+[31m-      readField();[m
+[31m-    }[m
+[31m-[m
+[31m-    public static bool isWin()[m
+[31m-    {[m
+[31m-      if (field[userRow, userCol] == 'e') return true;[m
+[32m+[m[32m      if (userRow == 29 && userCol == 50) return true;[m
+       return false;[m
+     }[m
+ [m
+[31m-    static char[,] field = new char[20, 30];[m
+[32m+[m[32m    private static char[,] field = new char[31, 51];[m
+ [m
+     static int userRow;[m
+     static int userCol;[m
+ [m
+[31m-    private static void readField()[m
+[32m+[m[32m    public static void PrintField(bool visible)[m
+     {[m
+[31m-      StreamReader fin = new StreamReader("GameField.txt");[m
+[31m-      for (int i = 0; i < 20; i++)[m
+[32m+[m[32m      for (int i = 0; i < 31; i++)[m
+       {[m
+[31m-        for (int j = 0; j < 30; j++)[m
+[32m+[m[32m        for (int j = 0; j < 51; j++)[m
+         {[m
+[31m-          char ch = (char)fin.Read();[m
+[31m-          if (!(ch == 'x' || ch == '.' || ch == 's' || ch == 'e'))[m
+[32m+[m[32m          if (!visible)[m
+           {[m
+[31m-            j--;[m
+[31m-            continue;[m
+[32m+[m[32m            if (Math.Abs(userRow - i) < 4 && Math.Abs(userCol - j) < 4)[m
+[32m+[m[32m            {[m
+[32m+[m[32m              if (i == userRow && j == userCol)[m
+[32m+[m[32m              {[m
+[32m+[m[32m                Console.BackgroundColor = ConsoleColor.DarkRed;[m
+[32m+[m[32m                Console.Write("  ");[m
+[32m+[m[32m                Console.ResetColor();[m
+[32m+[m[32m              }[m
+[32m+[m[32m              else if (field[i, j] == 'x')[m
+[32m+[m[32m              {[m
+[32m+[m[32m                Console.BackgroundColor = ConsoleColor.Gray;[m
+[32m+[m[32m                Console.Write("  ");[m
+[32m+[m[32m                Console.ResetColor();[m
+[32m+[m[32m              }[m
+[32m+[m[32m              else[m
+[32m+[m[32m              {[m
+[32m+[m[32m                Console.Write("  ");[m
+[32m+[m[32m              }[m
+[32m+[m[32m              continue;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            Console.BackgroundColor = ConsoleColor.DarkGray;[m
+[32m+[m[32m            Console.Write("  ");[m
+[32m+[m[32m            Console.ResetColor();[m
+           }[m
+[31m-          if (ch == 's')[m
+[32m+[m[32m          else[m
+           {[m
+[31m-            userRow = i;[m
+[31m-            userCol = j;[m
+[32m+[m[32m            if (i == userRow && j == userCol)[m
+[32m+[m[32m            {[m
+[32m+[m[32m              Console.BackgroundColor = ConsoleColor.DarkRed;[m
+[32m+[m[32m              Console.Write("  ");[m
+[32m+[m[32m              Console.ResetColor();[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else if (field[i, j] == 'x')[m
+[32m+[m[32m            {[m
+[32m+[m[32m              Console.BackgroundColor = ConsoleColor.Gray;[m
+[32m+[m[32m              Console.Write("  ");[m
+[32m+[m[32m              Console.ResetColor();[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else[m
+[32m+[m[32m            {[m
+[32m+[m[32m              Console.Write("  ");[m
+[32m+[m[32m            }[m
+[32m+[m[32m            continue;[m
+           }[m
+[31m-          field[i, j] = ch;[m
+[32m+[m[41m          [m
+         }[m
+[32m+[m[32m        Console.WriteLine();[m
+[32m+[m[32m      }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private static bool HaveNoVisitedNeighbour(int row, int col, bool[,] visited)[m
+[32m+[m[32m    {[m
+[32m+[m[32m      if ((row - 2 < 0 || visited[row - 2, col] == true) &&[m
+[32m+[m[32m          (row + 2 > 30 || visited[row + 2, col] == true) &&[m
+[32m+[m[32m          (col - 2 < 0 || visited[row, col - 2] == true) &&[m
+[32m+[m[32m          (col + 2 > 50 || visited[row, col + 2] == true)) return false;[m
+[32m+[m
+[32m+[m[32m      return true;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private static void DeleteWall(int row1, int col1, int row2, int col2)[m
+[32m+[m[32m    {[m
+[32m+[m[32m      if (row1 == row2)[m
+[32m+[m[32m      {[m
+[32m+[m[32m        field[row1, Math.Min(col1, col2) + 1] = '.';[m
+[32m+[m[32m      }[m
+[32m+[m[32m      else[m
+[32m+[m[32m      {[m
+[32m+[m[32m        field[Math.Min(row1, row2) + 1, col1] = '.';[m
+       }[m
+[31m-      fin.Close();[m
+     }[m
+ [m
+[31m-    public static void printField()[m
+[32m+[m[32m    private static readonly int seed = Environment.TickCount;[m
+[32m+[m
+[32m+[m[32m    private static readonly Random rnd = new Random(seed);[m
+[32m+[m
+[32m+[m[32m    private static void Dfs(int row, int col, bool[,] visited)[m
+     {[m
+[31m-      for (int i = 0; i < 20; i++)[m
+[32m+[m[32m      visited[row, col] = true;[m
+[32m+[m
+[32m+[m[32m      while (HaveNoVisitedNeighbour(row, col, visited))[m
+       {[m
+[31m-        for (int j = 0; j < 30; j++)[m
+[32m+[m[32m        int temp = rnd.Next(0, 4);[m
+[32m+[m
+[32m+[m[32m        switch (temp)[m
+         {[m
+[31m-          if (i == userRow && j == userCol)[m
+[31m-          {[m
+[31m-            Console.BackgroundColor = ConsoleColor.DarkRed;[m
+[31m-            Console.Write("  ");[m
+[31m-            Console.ResetColor();[m
+[31m-          }[m
+[31m-          else if (field[i, j] == 'x')[m
+[31m-          {[m
+[31m-            Console.BackgroundColor = ConsoleColor.DarkBlue;[m
+[31m-            Console.Write("  ");[m
+[31m-            Console.ResetColor();[m
+[31m-          }[m
+[31m-          else[m
+[31m-          {[m
+[31m-            Console.Write("  ");[m
+[31m-          }[m
+[32m+[m[32m          case 0:[m
+[32m+[m[32m            if (!(row - 2 < 0) && visited[row - 2, col] == false)[m
+[32m+[m[32m            {[m
+[32m+[m[32m              DeleteWall(row, col, row - 2, col);[m
+[32m+[m[32m              Dfs(row - 2, col, visited);[m
+[32m+[m[32m            }[m
+[32m+[m[32m            break;[m
+[32m+[m[32m          case 1:[m
+[32m+[m[32m            if (!(row + 2 > 30) && visited[row + 2, col] == false)[m
+[32m+[m[32m            {[m
+[32m+[m[32m              DeleteWall(row, col, row + 2, col);[m
+[32m+[m[32m              Dfs(row + 2, col, visited);[m
+[32m+[m[32m            }[m
+[32m+[m[32m            break;[m
+[32m+[m[32m          case 2:[m
+[32m+[m[32m            if (!(col - 2 < 0) && visited[row, col - 2] == false)[m
+[32m+[m[32m            {[m
+[32m+[m[32m              DeleteWall(row, col, row, col - 2);[m
+[32m+[m[32m              Dfs(row, col - 2, visited);[m
+[32m+[m[32m            }[m
+[32m+[m[32m            break;[m
+[32m+[m[32m          case 3:[m
+[32m+[m[32m            if (!(col + 2 > 50) && visited[row, col + 2] == false)[m
+[32m+[m[32m            {[m
+[32m+[m[32m              DeleteWall(row, col, row, col + 2);[m
+[32m+[m[32m              Dfs(row, col + 2, visited);[m
+[32m+[m[32m            }[m
+[32m+[m[32m            break;[m
+         }[m
+[31m-        Console.WriteLine();[m
+       }[m
+     }[m
+ [m
+[31m-    public static void up()[m
+[32m+[m[32m    public static void CreateField()[m
+     {[m
+[31m-      if (userRow == 0 || field[userRow - 1, userCol] == 'x') return;[m
+[32m+[m[32m      bool[,] visited = new bool[31, 51];[m
+[32m+[m[32m      userRow = userCol = 1;[m
+[32m+[m
+[32m+[m[32m      for (int i = 0; i < 31; i++)[m
+[32m+[m[32m      {[m
+[32m+[m[32m        for (int j = 0; j < 51; j++)[m
+[32m+[m[32m        {[m
+[32m+[m[32m          if ((i % 2 != 0 && j % 2 != 0) && (i < 30 && j < 50)) field[i, j] = '.';[m
+[32m+[m[32m          else field[i, j] = 'x';[m
+[32m+[m[32m        }[m
+[32m+[m[32m      }[m
+[32m+[m[32m      field[1, 0] = '.';[m
+[32m+[m[32m      field[29, 50] = '.';[m
+[32m+[m
+[32m+[m[32m      Dfs(1, 1, visited);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public static void Up()[m
+[32m+[m[32m    {[m
+[32m+[m[32m      if (field[userRow - 1, userCol] == 'x') return;[m
+       userRow--;[m
+     }[m
+[31m-    public static void down()[m
+[32m+[m[32m    public static void Down()[m
+     {[m
+[31m-      if (userRow == 19 || field[userRow + 1, userCol] == 'x') return;[m
+[32m+[m[32m      if (field[userRow + 1, userCol] == 'x') return;[m
+       userRow++;[m
+     }[m
+[31m-    public static void left()[m
+[32m+[m[32m    public static void Left()[m
+     {[m
+       if (userCol == 0 || field[userRow, userCol - 1] == 'x') return;[m
+       userCol--;[m
+     }[m
+[31m-    public static void right()[m
+[32m+[m[32m    public static void Right()[m
+     {[m
+[31m-      if (userRow == 0 || field[userRow, userCol + 1] == 'x') return;[m
+[32m+[m[32m      if (userCol == 50 || field[userRow, userCol + 1] == 'x') return;[m
+       userCol++;[m
+     }[m
+   }[m
+[36m@@ -98,44 +187,158 @@[m [mnamespace Lab1[m
+ [m
+   class Program[m
+   {[m
+[32m+[m
+[32m+[m[32m    enum Menu[m
+[32m+[m[32m    {[m
+[32m+[m[32m      Play,[m
+[32m+[m[32m      Settings,[m
+[32m+[m[32m      Exit[m
+[32m+[m[32m    }[m
+[32m+[m
+     static void Main(string[] args)[m
+     {[m
+[32m+[m[32m      Console.SetWindowSize(102, 32);[m
+       Console.CursorVisible = false;[m
+ [m
+[31m-      while (!Game.isWin())[m
+[32m+[m[32m      Menu menu = Menu.Play;[m
+[32m+[m[32m      bool visible = false;[m
+[32m+[m[32m      ConsoleKeyInfo key;[m
+[32m+[m[32m      while (true)[m
+       {[m
+[31m-        Console.SetCursorPosition(0, 0);[m
+[31m-        Game.printField();[m
+[31m-        ConsoleKeyInfo key;[m
+[32m+[m[32m        if (menu == Menu.Play)[m
+[32m+[m[32m        {[m
+[32m+[m[32m          Console.BackgroundColor = ConsoleColor.DarkYellow;[m
+[32m+[m[32m          Console.ForegroundColor = ConsoleColor.Black;[m
+[32m+[m[32m          Console.SetCursorPosition(46, 13);[m
+[32m+[m[32m          Console.WriteLine("   Play   ");[m
+[32m+[m[32m          Console.ResetColor();[m
+[32m+[m[32m          Console.SetCursorPosition(44, 17);[m
+[32m+[m[32m          Console.WriteLine("   Settings   ");[m
+[32m+[m[32m          Console.SetCursorPosition(46, 21);[m
+[32m+[m[32m          Console.WriteLine("   Exit   ");[m
+[32m+[m[32m        }[m[41m [m
+[32m+[m[32m        else if (menu == Menu.Exit)[m
+[32m+[m[32m        {[m
+[32m+[m[32m          Console.SetCursorPosition(46, 13);[m
+[32m+[m[32m          Console.WriteLine("   Play   ");[m
+[32m+[m[32m          Console.SetCursorPosition(44, 17);[m
+[32m+[m[32m          Console.WriteLine("   Settings   ");[m
+[32m+[m[32m          Console.BackgroundColor = ConsoleColor.DarkYellow;[m
+[32m+[m[32m          Console.ForegroundColor = ConsoleColor.Black;[m
+[32m+[m[32m          Console.SetCursorPosition(46, 21);[m
+[32m+[m[32m          Console.WriteLine("   Exit   ");[m
+[32m+[m[32m          Console.ResetColor();[m
+[32m+[m[32m        }[m
+[32m+[m[32m        else[m
+[32m+[m[32m        {[m
+[32m+[m[32m          Console.SetCursorPosition(46, 13);[m
+[32m+[m[32m          Console.WriteLine("   Play   ");[m
+[32m+[m[32m          Console.BackgroundColor = ConsoleColor.DarkYellow;[m
+[32m+[m[32m          Console.ForegroundColor = ConsoleColor.Black;[m
+[32m+[m[32m          Console.SetCursorPosition(44, 17);[m
+[32m+[m[32m          Console.WriteLine("   Settings   ");[m
+[32m+[m[32m          Console.ResetColor();[m
+[32m+[m[32m          Console.SetCursorPosition(46, 21);[m
+[32m+[m[32m          Console.WriteLine("   Exit   ");[m
+[32m+[m[32m        }[m
+[32m+[m
+         key = Console.ReadKey(true);[m
+ [m
+[31m-        if (key.Key == ConsoleKey.UpArrow)[m
+[32m+[m[32m        if (key.Key == ConsoleKey.Enter && menu == Menu.Exit) break;[m
+[32m+[m[32m        else if (key.Key == ConsoleKey.Enter && menu == Menu.Play)[m
+         {[m
+[31m-          Game.up();[m
+[32m+[m[32m          Game.CreateField();[m
+[32m+[m[32m          while (!Game.IsWin())[m
+[32m+[m[32m          {[m
+[32m+[m[32m            Console.SetCursorPosition(0, 0);[m
+[32m+[m[32m            Game.PrintField(visible);[m
+[32m+[m[32m            key = Console.ReadKey(true);[m
+[32m+[m
+[32m+[m[32m            if (key.Key == ConsoleKey.Escape) goto label;[m
+[32m+[m[32m            else if (key.Key == ConsoleKey.UpArrow)[m
+[32m+[m[32m            {[m
+[32m+[m[32m              Game.Up();[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else if (key.Key == ConsoleKey.DownArrow)[m
+[32m+[m[32m            {[m
+[32m+[m[32m              Game.Down();[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else if (key.Key == ConsoleKey.LeftArrow)[m
+[32m+[m[32m            {[m
+[32m+[m[32m              Game.Left();[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else[m
+[32m+[m[32m            {[m
+[32m+[m[32m              Game.Right();[m
+[32m+[m[32m            }[m
+[32m+[m[32m          }[m
+[32m+[m
+[32m+[m[32m          for (int i = 0; i < 30; i++)[m
+[32m+[m[32m          {[m
+[32m+[m[32m            Console.WriteLine();[m
+[32m+[m[32m          }[m
+[32m+[m[32m          Console.WriteLine("                                            Congratulations!!!");[m
+[32m+[m[32m          for (int i = 0; i < 14; i++)[m
+[32m+[m[32m          {[m
+[32m+[m[32m            Console.WriteLine();[m
+[32m+[m[32m          }[m
+[32m+[m[32m          Console.Read();[m
+[32m+[m[32m          label:[m
+[32m+[m[32m          Console.Clear();[m
+         }[m
+[31m-        else if (key.Key == ConsoleKey.DownArrow)[m
+[32m+[m[32m        else if (key.Key == ConsoleKey.Enter && menu == Menu.Settings)[m
+         {[m
+[31m-          Game.down();[m
+[32m+[m[32m          Console.Clear();[m
+[32m+[m[32m          while (true)[m
+[32m+[m[32m          {[m
+[32m+[m[32m            Console.SetCursorPosition(40, 16);[m
+[32m+[m[32m            Console.WriteLine("Visible:   ");[m
+[32m+[m[32m            if (visible)[m
+[32m+[m[32m            {[m
+[32m+[m[32m              Console.BackgroundColor = ConsoleColor.DarkYellow;[m
+[32m+[m[32m              Console.ForegroundColor = ConsoleColor.Black;[m
+[32m+[m[32m              Console.SetCursorPosition(50, 16);[m
+[32m+[m[32m              Console.WriteLine("   ON   ");[m
+[32m+[m[32m              Console.ResetColor();[m
+[32m+[m[32m              Console.SetCursorPosition(58, 16);[m
+[32m+[m[32m              Console.WriteLine("   OFF   ");[m
+[32m+[m[32m            }[m
+[32m+[m[32m            else[m
+[32m+[m[32m            {[m
+[32m+[m[32m              Console.SetCursorPosition(50, 16);[m
+[32m+[m[32m              Console.WriteLine("   ON   ");[m
+[32m+[m[32m              Console.BackgroundColor = ConsoleColor.DarkYellow;[m
+[32m+[m[32m              Console.ForegroundColor = ConsoleColor.Black;[m
+[32m+[m[32m              Console.SetCursorPosition(58, 16);[m
+[32m+[m[32m              Console.WriteLine("   OFF   ");[m
+[32m+[m[32m              Console.ResetColor();[m
+[32m+[m[32m            }[m
+[32m+[m[32m            key = Console.ReadKey(true);[m
+[32m+[m[32m            if (key.Key == ConsoleKey.LeftArrow) visible = true;[m
+[32m+[m[32m            else if (key.Key == ConsoleKey.RightArrow) visible = false;[m
+[32m+[m[32m            else if (key.Key == ConsoleKey.Enter)[m
+[32m+[m[32m            {[m
+[32m+[m[32m              Console.Clear();[m
+[32m+[m[32m              break;[m
+[32m+[m[32m            }[m
+[32m+[m[32m          }[m
+         }[m
+[31m-        else if (key.Key == ConsoleKey.LeftArrow)[m
+[32m+[m[32m        else if (key.Key == ConsoleKey.UpArrow)[m
+         {[m
+[31m-          Game.left();[m
+[32m+[m[32m          menu = menu == Menu.Exit ? Menu.Settings : Menu.Play;[m
+         }[m
+         else[m
+         {[m
+[31m-          Game.right();[m
+[32m+[m[32m          menu = menu == Menu.Play ? Menu.Settings : Menu.Exit;[m
+         }[m
+       }[m
+ [m
+[31m-      for (int i = 0; i < 30; i++)[m
+[31m-      {[m
+[31m-        Console.WriteLine();[m
+[31m-      }[m
+[31m-      Console.WriteLine("                                                    Congratulations");[m
+[31m-      for (int i = 0; i < 14; i++)[m
+[31m-      {[m
+[31m-        Console.WriteLine();[m
+[31m-      }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[41m      [m
+[32m+[m
+[32m+[m[41m      [m
+       [m
+     }[m
+   }[m
+[1mdiff --git a/Lab1/bin/Debug/Lab1.exe b/Lab1/bin/Debug/Lab1.exe[m
+[1mindex 278d2ef..502a941 100644[m
+Binary files a/Lab1/bin/Debug/Lab1.exe and b/Lab1/bin/Debug/Lab1.exe differ
+[1mdiff --git a/Lab1/bin/Debug/Lab1.pdb b/Lab1/bin/Debug/Lab1.pdb[m
+[1mindex 7629307..8451f97 100644[m
+Binary files a/Lab1/bin/Debug/Lab1.pdb and b/Lab1/bin/Debug/Lab1.pdb differ
+[1mdiff --git a/Lab1/obj/Debug/Lab1.csprojAssemblyReference.cache b/Lab1/obj/Debug/Lab1.csprojAssemblyReference.cache[m
+[1mindex 262abda..4d40761 100644[m
+Binary files a/Lab1/obj/Debug/Lab1.csprojAssemblyReference.cache and b/Lab1/obj/Debug/Lab1.csprojAssemblyReference.cache differ
+[1mdiff --git a/Lab1/obj/Debug/Lab1.exe b/Lab1/obj/Debug/Lab1.exe[m
+[1mindex 278d2ef..502a941 100644[m
+Binary files a/Lab1/obj/Debug/Lab1.exe and b/Lab1/obj/Debug/Lab1.exe differ
+[1mdiff --git a/Lab1/obj/Debug/Lab1.pdb b/Lab1/obj/Debug/Lab1.pdb[m
+[1mindex 7629307..8451f97 100644[m
+Binary files a/Lab1/obj/Debug/Lab1.pdb and b/Lab1/obj/Debug/Lab1.pdb differ
