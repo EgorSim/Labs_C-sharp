@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 
 namespace Lab1
@@ -69,7 +68,7 @@ namespace Lab1
             }
             continue;
           }
-          
+
         }
         Console.WriteLine();
       }
@@ -216,7 +215,7 @@ namespace Lab1
           Console.WriteLine("   Settings   ");
           Console.SetCursorPosition(46, 21);
           Console.WriteLine("   Exit   ");
-        } 
+        }
         else if (menu == Menu.Exit)
         {
           Console.SetCursorPosition(46, 13);
@@ -283,7 +282,7 @@ namespace Lab1
             Console.WriteLine();
           }
           Console.Read();
-          label:
+        label:
           Console.Clear();
         }
         else if (key.Key == ConsoleKey.Enter && menu == Menu.Settings)
@@ -332,14 +331,6 @@ namespace Lab1
           menu = menu == Menu.Play ? Menu.Settings : Menu.Exit;
         }
       }
-
-
-
-
-      
-
-      
-      
     }
   }
 }
