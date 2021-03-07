@@ -35,7 +35,7 @@ namespace Lab2
         {
           break;
         }
-      }      
+      }
     }
   }
 }
