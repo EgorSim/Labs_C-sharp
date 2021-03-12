@@ -7,8 +7,18 @@ namespace Lab2
     static void Main(string[] args)
     {
       ulong result = 0;
-      ulong a = (ulong)Convert.ToUInt64(Console.ReadLine());
-      ulong b = (ulong)Convert.ToUInt64(Console.ReadLine());
+      ulong a = 0;
+      ulong b = 0;
+      try
+      {
+        a = (ulong)Convert.ToUInt64(Console.ReadLine());
+        b = (ulong)Convert.ToUInt64(Console.ReadLine());
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine($"Error: {ex.Message}");
+        return;
+      }
       ulong p = 2;
       while (p <= b && p != 0)
       {
