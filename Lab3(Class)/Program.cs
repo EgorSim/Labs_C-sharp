@@ -16,7 +16,6 @@ namespace Human
 
       Human dasha = new Human("Dasha", "Kolbaskina", 18, Sex.Women);
 
-
       egorchik.AddFriend(dasha);
 
       egorchik[0].ShowInfo();
