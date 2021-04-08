@@ -11,6 +11,14 @@ namespace Lab3_Class_
       BestResult = 0;
       results = new List<double>();
     }
+
+    public Athlet(Athlet obj) : base(obj)
+    {
+      this.WhatSport = obj.WhatSport;
+      this.BestResult = obj.BestResult;
+      this.results = obj.results;
+    }
+
     public Athlet(string name, string second, int age, Sex sex, int exp, int golds, int silvers, int bronzes) 
            : base(name, second, age, sex, exp, golds, silvers, bronzes)
     {

@@ -16,6 +16,14 @@ namespace Lab3_Class_
       awards = new Awards();
     }
 
+    public Sportsman(Sportsman obj) : base(obj)
+    {
+      this.Gold = obj.Gold;
+      this.Silver = obj.Silver;
+      this.Bronze = obj.Bronze;
+      this.Experience = obj.Experience;
+    }
+
     public Sportsman(string name, string second, int age, Sex sex, int exp, int golds, int silvers, int bronzes)
               : base(name, second, age, sex)
     {

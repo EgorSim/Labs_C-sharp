@@ -14,11 +14,13 @@
       age = 0;
       Sex = Sex.Udefined;
     }
+
     public Mammals(Mammals obj)
     {
       this.Age = obj.age;
       this.Sex = obj.Sex;
     }
+
     public Mammals(int age, Sex sex)
     {
       this.age = age;
