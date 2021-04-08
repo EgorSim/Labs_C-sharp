@@ -19,6 +19,14 @@ namespace Lab3_Class_
       CountOfHumans++;
     }
 
+    public Human(Human obj) : base(obj)
+    {
+      this.Name = obj.Name;
+      this.SecondName = obj.SecondName;
+      this.CountOfFriends = obj.CountOfFriends;
+      this.friends = obj.friends;
+    }
+
     private static int countOfHumans;
     public static int CountOfHumans
     {
