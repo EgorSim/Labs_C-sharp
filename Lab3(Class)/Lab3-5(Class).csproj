@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Athlet.cs" />
     <Compile Include="Human.cs" />
+    <Compile Include="Mammals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sportsman.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

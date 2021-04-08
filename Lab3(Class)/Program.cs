@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Human
+namespace Lab3_Class_
 {
   class Program
   {
@@ -26,6 +26,15 @@ namespace Human
       Console.WriteLine();
       Human anon = new Human();
       anon.ShowInfo();
+
+
+      Athlet john = new Athlet("John", "Alewan", 22, Sex.Man, exp: 8, golds: 5, silvers: 7, bronzes: 0);
+      john.ShowInfo();
+      Console.WriteLine();
+      john.DoExercise();
+      john.ShowInfo();
+
+
     }
   }
 }

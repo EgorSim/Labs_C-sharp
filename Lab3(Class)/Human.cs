@@ -1,32 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Human
+namespace Lab3_Class_
 {
-  enum Sex
+  class Human : Mammals
   {
-    Udefined,
-    Man,
-    Women
-  }
-
-  class Human
-  {
-    public Human()
+    public Human() : base()
     {
       this.Name = "";
       this.SecondName = "";
-      this.Age = 0;
-      this.Sex = Sex.Udefined;
       CountOfHumans++;
     }
 
-    public Human(string name, string second, int age, Sex sex)
+    public Human(string name, string second, int age, Sex sex) : base(age, sex)
     {
       this.Name = name;
       this.SecondName = second;
-      this.Age = age;
-      this.Sex = sex;
       CountOfHumans++;
     }
 
@@ -69,27 +58,7 @@ namespace Human
       }
     }
 
-    private int age;
-    public int Age
-    {
-      get
-      {
-        return age;
-      }
-      set
-      {
-        if (value < 0 || value > 250)
-        {
-          age = 0;
-          return;
-        }
-        age = value;
-      }
-    }
-
-    public Sex Sex { get; set; }
-
-    public void ShowInfo()
+    public override void ShowInfo()
     {
       Console.WriteLine("Person`s info:\n");
       Console.WriteLine($"Name: {Name}\nSecond name: {SecondName}\nAge: {Age}\nSex: {Sex}");
