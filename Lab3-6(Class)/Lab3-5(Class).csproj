@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Athlet.cs" />
     <Compile Include="Human.cs" />
+    <Compile Include="Inter.cs" />
     <Compile Include="Mammals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

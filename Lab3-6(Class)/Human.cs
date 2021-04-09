@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace Lab3_Class_
 {
-  class Human : Mammals
+  class Human : Mammals, ILife
   {
     public Human() : base()
     {
       this.Name = "";
       this.SecondName = "";
+      friends = new List<Human>();
       CountOfHumans++;
     }
 
@@ -16,6 +17,7 @@ namespace Lab3_Class_
     {
       this.Name = name;
       this.SecondName = second;
+      friends = new List<Human>();
       CountOfHumans++;
     }
 
@@ -85,7 +87,7 @@ namespace Lab3_Class_
       }
     }
 
-    private List<Human> friends = new List<Human>();
+    private List<Human> friends;
 
     public void AddFriend(Human person)
     {
@@ -106,6 +108,49 @@ namespace Lab3_Class_
         }
         return friends[index];
       }
+    }
+
+    public int EarnMoney()
+    {
+      Console.WriteLine($"{Name} going to the work...");
+      Console.WriteLine("How much money is paid for a full-day work (8h)?");
+      int price = 0;
+      try
+      {
+        price = Convert.ToInt32(Console.ReadLine());
+        if (price < 0) throw new Exception("Uncorrect price");
+      }
+      catch
+      {
+        Console.WriteLine("Uncorrect price");
+      }
+
+      Console.WriteLine("How much time you have worked today?");
+      double time = 0;
+      try
+      {
+        time = Convert.ToDouble(Console.ReadLine());
+        if (time < 0 || time > 8) throw new Exception("Uncorrect time");
+      }
+      catch
+      {
+        Console.WriteLine("Uncorrect time");
+      }
+      Console.WriteLine($"Congratulations!!! You earned {(int)((double)time / 8.0 * price)} $");
+      return (int)((double)time / 8.0 * price);
+    }
+
+    public void Relax()
+    {
+      Console.WriteLine($"{Name} going to the club...");
+      Random rnd = new Random();
+      int index = rnd.Next(0, CountOfFriends);
+      int count;
+      for (count = 0; count <= 3 || count <= friends[index].CountOfFriends; count++)
+      {
+        this.AddFriend(this.friends[index].friends[count]);
+      }
+      Console.WriteLine($"{Name} fount {count} new friends");
     }
   }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace Lab3_Class_
 {
   enum Sports
@@ -9,7 +10,7 @@ namespace Lab3_Class_
     ShotPut
   }
 
-  abstract class Sportsman : Human
+  abstract class Sportsman : Human, ILife, IComparable<Mammals>
   {
     public Sportsman() : base()
     {
@@ -103,6 +104,62 @@ namespace Lab3_Class_
     {
       base.ShowInfo();
       Console.WriteLine($"Experience {Experience}\nHe has {Gold} gold, {Silver} silver and {Bronze} bronze medals");
+    }
+
+    public new int EarnMoney()
+    {
+      Console.WriteLine($"{Name} going to the competition...");
+      Console.WriteLine("What is prize fund ($)? ");
+      int fund = 0;
+      try
+      {
+        fund = Convert.ToInt32(Console.ReadLine());
+      }
+      catch
+      {
+        Console.WriteLine("Unkorrect fund");
+      }
+      DoExercise();
+      Console.WriteLine("What place did you take?");
+      int place = 0;
+      try
+      {
+        place = Convert.ToInt32(Console.ReadLine());
+      }
+      catch
+      {
+        Console.WriteLine("Unkorrect fund");
+      }
+      if (place == 1)
+      {
+        Console.WriteLine($"Congratulations!!! You earned {fund} $");
+        return fund;
+      }
+      else if (place == 2)
+      {
+        Console.WriteLine($"Congratulations!!! You earned {fund * 3 / 5} $");
+        return fund * 3 / 5;
+      }
+      else if (place == 3)
+      {
+        Console.WriteLine($"Congratulations!!! You earned {fund * 3 / 10} $");
+        return fund * 3 / 10;
+      }
+      throw new Exception("Uncorrect place");
+    }
+
+    public new void Relax()
+    {
+      Console.WriteLine($"{Name} going to the park...");
+    }
+
+    /// <param name="obj"></param>
+    /// <returns>Compare by golden medals</returns>
+    public override int CompareTo(Sportsman obj)
+    {
+      if (this.Gold == obj.Gold) return 0;
+      else if (this.Gold > obj.Gold) return 1;
+      else return -1;
     }
   }
 }

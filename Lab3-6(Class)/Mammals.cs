@@ -1,4 +1,6 @@
-﻿namespace Lab3_Class_
+﻿using System;
+
+namespace Lab3_Class_
 {
   enum Sex
   {
@@ -7,7 +9,7 @@
     Women
   }
 
-  abstract class Mammals
+  abstract class Mammals : IComparable<Mammals>
   {
     public Mammals()
     {
@@ -48,5 +50,14 @@
     public Sex Sex { get; set; }
 
     public abstract void ShowInfo();
+
+    /// <param name="other"></param>
+    /// <returns>Compare by age</returns>
+    public virtual int CompareTo(Mammals other)
+    {
+      if (this.Age == other.Age) return 0;
+      else if (this.Age > other.Age) return 1;
+      else return -1;
+    }
   }
 }
