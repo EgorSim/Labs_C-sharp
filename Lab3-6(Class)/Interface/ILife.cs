@@ -7,10 +7,4 @@
 
     void Relax();
   }
-
-  interface ILife2
-  {
-    int EarnMoney();
-  }
-
 }

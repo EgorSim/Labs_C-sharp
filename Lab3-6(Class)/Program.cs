@@ -33,7 +33,7 @@ namespace Lab3_Class_
       Console.WriteLine();
       Console.WriteLine();
 
-      //john.EarnMoney();
+      john.EarnMoney();
 
       Console.WriteLine();
 

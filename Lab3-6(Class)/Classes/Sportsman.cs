@@ -10,7 +10,7 @@ namespace Lab3_Class_
     ShotPut
   }
 
-  abstract class Sportsman : Human, ILife, ILife2, IComparable<Mammals>
+  abstract class Sportsman : Human, ILife, IComparable<Mammals>
   {
     public Sportsman() : base()
     {
@@ -106,7 +106,7 @@ namespace Lab3_Class_
       Console.WriteLine($"Experience {Experience}\nHe has {Gold} gold, {Silver} silver and {Bronze} bronze medals");
     }
 
-    int ILife.EarnMoney()
+    public new int EarnMoney()
     {
       Console.WriteLine($"{Name} going to the competition...");
       Console.WriteLine("What is prize fund ($)? ");
@@ -146,17 +146,6 @@ namespace Lab3_Class_
         return fund * 3 / 10;
       }
       throw new Exception("Uncorrect place");
-    }
-
-    int ILife2.EarnMoney()
-    {
-      return 3;
-    }
-
-    public void F()
-    {
-      ILife oj = this;
-      oj.EarnMoney();
     }
 
     public new void Relax()
