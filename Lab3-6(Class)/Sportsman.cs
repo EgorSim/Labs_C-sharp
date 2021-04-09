@@ -155,7 +155,7 @@ namespace Lab3_Class_
 
     /// <param name="obj"></param>
     /// <returns>Compare by golden medals</returns>
-    public override int CompareTo(Sportsman obj)
+    public int CompareTo(Sportsman obj)
     {
       if (this.Gold == obj.Gold) return 0;
       else if (this.Gold > obj.Gold) return 1;

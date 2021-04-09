@@ -53,7 +53,7 @@ namespace Lab3_Class_
 
     /// <param name="other"></param>
     /// <returns>Compare by age</returns>
-    public virtual int CompareTo(Mammals other)
+    public int CompareTo(Mammals other)
     {
       if (this.Age == other.Age) return 0;
       else if (this.Age > other.Age) return 1;

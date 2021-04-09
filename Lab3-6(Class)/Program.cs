@@ -4,8 +4,29 @@ namespace Lab3_Class_
 {
   class Program
   {
+
+    class B
+    {
+      B()
+      {
+        k = 23;
+      }
+      int k;
+    }
+
+    struct A
+    {
+      B pr;
+      int x;
+      string str;
+    }
+
+
     static void Main(string[] args)
     {
+      A df;
+      A dd = new A();
+
       Human egorchik = new Human();
       egorchik.Age = 18;
       egorchik.Name = "Egorchik";
