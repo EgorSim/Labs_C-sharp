@@ -17,6 +17,12 @@ namespace Lab7
 
       Console.WriteLine();
 
+      Console.WriteLine(a1.ToStirng("{0:C}"));
+      Console.WriteLine(a1.ToStirng("{0:C}", "en-US"));
+      Console.WriteLine(a1.ToStirng("{0:f4}"));
+      Console.WriteLine(a1.ToStirng("{0:P1}"));
+
+      Console.WriteLine();
 
       RationalNum a2 = new RationalNum("0.654(32)");
       RationalNum b2 = new RationalNum("-36.987");
@@ -27,8 +33,18 @@ namespace Lab7
       Console.WriteLine(a2.ToString());
       Console.WriteLine(b2.ToString());
 
+      RationalNum res3 = a2 * b2;
+      Console.WriteLine(res3);
+
+      RationalNum res4 = a2 / b2;
+      Console.WriteLine(res4);
 
 
+      double d = a1;
+      int i = (int)a1;
+
+      Console.WriteLine(d);
+      Console.WriteLine(i);
 
 
 
