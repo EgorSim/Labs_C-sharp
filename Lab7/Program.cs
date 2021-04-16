@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Lab7
 {
@@ -18,7 +19,6 @@ namespace Lab7
       Console.WriteLine();
 
       Console.WriteLine(a1.ToStirng("{0:C}"));
-      Console.WriteLine(a1.ToStirng("{0:C}", "en-US"));
       Console.WriteLine(a1.ToStirng("{0:f4}"));
       Console.WriteLine(a1.ToStirng("{0:P1}"));
 
@@ -38,7 +38,6 @@ namespace Lab7
 
       RationalNum res4 = a2 / b2;
       Console.WriteLine(res4);
-
 
       double d = a1;
       int i = (int)a1;

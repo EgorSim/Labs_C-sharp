@@ -48,7 +48,7 @@ namespace Lab7
     public string ToString(string format, IFormatProvider formatProvider)
     {
       if (formatProvider == null) formatProvider = CultureInfo.CurrentCulture;
-      double res = n / m;
+      double res = (double)n / m;
       res = negative ? -res : res;
       return res.ToString(format, formatProvider);
     }
