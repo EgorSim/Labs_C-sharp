@@ -29,7 +29,7 @@ namespace Lab3_Class_
     
     public Sports WhatSport { get; private set; }
 
-    public override void DoExercise()
+    public override void DoExercise1()
     {
       Console.WriteLine("Please enter the result of the 100 meter race (sec): ");
       try
@@ -37,6 +37,30 @@ namespace Lab3_Class_
         double res = Convert.ToDouble(Console.ReadLine());
         results.Add(res);
         BestResult = res > BestResult ? res : BestResult;
+      }
+      catch
+      {
+        Console.WriteLine("Uncorrect result");
+      }
+    }
+    public override void DoExercise2()
+    {
+      Console.WriteLine("Please enter the result of the long jump(sm): ");
+      try
+      {
+        int res = Convert.ToInt32(Console.ReadLine());
+      }
+      catch
+      {
+        Console.WriteLine("Uncorrect result");
+      }
+    }
+    public override void DoExercise3()
+    {
+      Console.WriteLine("Please enter the result of the high jump(sm): ");
+      try
+      {
+        int res = Convert.ToInt32(Console.ReadLine());
       }
       catch
       {

@@ -10,6 +10,8 @@ namespace Lab3_Class_
     ShotPut
   }
 
+  delegate void DoneExercise();
+
   abstract class Sportsman : Human, ILife, IComparable<Mammals>
   {
     public Sportsman() : base()
@@ -98,13 +100,17 @@ namespace Lab3_Class_
 
     public int Experience { get; set; }
 
-    public abstract void DoExercise();
+    public abstract void DoExercise1();
+    public abstract void DoExercise2();
+    public abstract void DoExercise3();
 
     public override void ShowInfo()
     {
       base.ShowInfo();
       Console.WriteLine($"Experience {Experience}\nHe has {Gold} gold, {Silver} silver and {Bronze} bronze medals");
     }
+
+    public event DoneExercise CompititonResults;
 
     public new int EarnMoney()
     {
@@ -119,7 +125,6 @@ namespace Lab3_Class_
       {
         Console.WriteLine("Unkorrect fund");
       }
-      DoExercise();
       Console.WriteLine("What place did you take?");
       int place = 0;
       try
@@ -130,6 +135,9 @@ namespace Lab3_Class_
       {
         Console.WriteLine("Unkorrect fund");
       }
+
+      CompititonResults?.Invoke();
+
       if (place == 1)
       {
         Console.WriteLine($"Congratulations!!! You earned {fund} $");

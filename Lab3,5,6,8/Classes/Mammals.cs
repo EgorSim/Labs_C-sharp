@@ -41,7 +41,7 @@ namespace Lab3_Class_
         if (value < 0 || value > 250)
         {
           age = 0;
-          return;
+          throw new Exception("Impossible age");
         }
         age = value;
       }
